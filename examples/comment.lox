@@ -5,3 +5,10 @@
 123
 12.3
 a or b
+
+/* a c-style block comment */
+/* another multiline comment
+   so so fancy
+*/
+
+/* can i nest /* multiline comments */ in other multiline comments */

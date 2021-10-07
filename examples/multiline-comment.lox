@@ -1,0 +1,3 @@
+/* can i nest /* block comments */ in other block comments */
+/* this is a block comment with a / character in it */
+/* i've got a * in me! */
