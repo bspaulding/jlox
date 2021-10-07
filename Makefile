@@ -1,7 +1,7 @@
 SHELL=/usr/local/bin/fish
 
 BUILD_DIR := build
-SRC_DIR := app/src/main
+SRC_DIR := src
 
 jar: $(BUILD_DIR) $(BUILD_DIR)/Manifest.MF
 	cd $(BUILD_DIR) && jar cmf Manifest.MF jlox.jar **/*.class
