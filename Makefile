@@ -26,7 +26,7 @@ $(CLSS): $(BUILD_DIR)/classes.list
 $(BUILD_DIR)/classes.list: $(SRCS)
 	find $(SRC_DIR) -name '*.java' > $(BUILD_DIR)/classes.list
 
-$(BUILD_DIR)/Manifest.MF: $(BUILD_DIR) Manifest.MF
+$(BUILD_DIR)/Manifest.MF: Manifest.MF
 	mkdir -p $(dir $@)
 	cp Manifest.MF $(BUILD_DIR)
 
