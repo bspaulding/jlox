@@ -1,6 +1,4 @@
-SHELL=/usr/local/bin/fish
-
-APP_NAME := $(shell basename (pwd))
+APP_NAME := $(shell basename $(shell pwd))
 BUILD_DIR := build
 SRC_DIR := src
 SRCS := $(shell find $(SRC_DIR) -name '*.java')
@@ -11,7 +9,7 @@ run: $(BUILD_DIR)/$(APP_NAME).jar
 	java -jar $(BUILD_DIR)/$(APP_NAME).jar $(args)
 
 $(BUILD_DIR)/$(APP_NAME).jar: $(BUILD_DIR)/Manifest.MF $(CLSS)
-	cd $(BUILD_DIR) && jar cmf Manifest.MF $(APP_NAME).jar **/*.class
+	jar --create --manifest $(BUILD_DIR)/Manifest.MF --file $(BUILD_DIR)/$(APP_NAME).jar -C $(BUILD_DIR)/ .
 
 $(BUILD_DIR)/$(APP_NAME): $(BUILD_DIR)/$(APP_NAME).jar
 	mkdir -p $(BUILD_DIR)/$(APP_NAME)
