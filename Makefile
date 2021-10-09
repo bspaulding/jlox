@@ -1,5 +1,6 @@
 SHELL=/usr/local/bin/fish
 
+APP_NAME := $(shell basename (pwd))
 BUILD_DIR := build
 SRC_DIR := src
 SRCS := $(shell find $(SRC_DIR) -name '*.java')
@@ -10,15 +11,15 @@ clean:
 	rm -rf build
 
 .PHONY: run
-run: $(BUILD_DIR)/jlox.jar
-	java -jar $(BUILD_DIR)/jlox.jar $(args)
+run: $(BUILD_DIR)/$(APP_NAME).jar
+	java -jar $(BUILD_DIR)/$(APP_NAME).jar $(args)
 
-$(BUILD_DIR)/jlox.jar: $(BUILD_DIR)/Manifest.MF $(CLSS)
-	cd $(BUILD_DIR) && jar cmf Manifest.MF jlox.jar **/*.class
+$(BUILD_DIR)/$(APP_NAME).jar: $(BUILD_DIR)/Manifest.MF $(CLSS)
+	cd $(BUILD_DIR) && jar cmf Manifest.MF $(APP_NAME).jar **/*.class
 
-$(BUILD_DIR)/jlox: $(BUILD_DIR)/jlox.jar
-	mkdir -p $(BUILD_DIR)/jlox
-	cd $(BUILD_DIR)/jlox && tar xzvf ../jlox.jar
+$(BUILD_DIR)/$(APP_NAME): $(BUILD_DIR)/$(APP_NAME).jar
+	mkdir -p $(BUILD_DIR)/$(APP_NAME)
+	cd $(BUILD_DIR)/$(APP_NAME) && tar xzvf ../$(APP_NAME).jar
 
 $(CLSS): $(BUILD_DIR)/classes.list
 	javac -d $(BUILD_DIR) @$(BUILD_DIR)/classes.list
