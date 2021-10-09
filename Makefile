@@ -6,10 +6,6 @@ SRC_DIR := src
 SRCS := $(shell find $(SRC_DIR) -name '*.java')
 CLSS := $(SRCS:$(SRC_DIR)/%.java=$(BUILD_DIR)/%.class)
 
-.PHONY: clean
-clean:
-	rm -rf build
-
 .PHONY: run
 run: $(BUILD_DIR)/$(APP_NAME).jar
 	java -jar $(BUILD_DIR)/$(APP_NAME).jar $(args)
@@ -30,4 +26,8 @@ $(BUILD_DIR)/classes.list: $(SRCS)
 $(BUILD_DIR)/Manifest.MF: Manifest.MF
 	mkdir -p $(dir $@)
 	cp Manifest.MF $(BUILD_DIR)
+
+.PHONY: clean
+clean:
+	rm -rf build
 
