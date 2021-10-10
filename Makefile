@@ -25,6 +25,10 @@ $(BUILD_DIR)/Manifest.MF: Manifest.MF
 	mkdir -p $(dir $@)
 	cp Manifest.MF $(BUILD_DIR)
 
+.PHONY: generate-ast
+generate-ast:
+	java src/com/craftinginterpreters/tool/GenerateAst.java src/com/craftinginterpreters/lox/
+
 .PHONY: clean
 clean:
 	rm -rf build
