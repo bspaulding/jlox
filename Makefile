@@ -27,7 +27,11 @@ $(BUILD_DIR)/Manifest.MF: Manifest.MF
 
 .PHONY: generate-ast
 generate-ast:
-	java src/com/craftinginterpreters/tool/GenerateAst.java src/com/craftinginterpreters/lox/
+	java -cp $(BUILD_DIR)/$(APP_NAME).jar com.craftinginterpreters.tool.GenerateAst src/com/craftinginterpreters/lox/
+
+.PHONY: print-ast
+print-ast: $(BUILD_DIR)/$(APP_NAME).jar
+	java -cp $(BUILD_DIR)/$(APP_NAME).jar com.craftinginterpreters.lox.AstPrinter
 
 .PHONY: clean
 clean:
