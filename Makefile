@@ -6,10 +6,10 @@ CLSS := $(SRCS:$(SRC_DIR)/%.java=$(BUILD_DIR)/%.class)
 
 .PHONY: run
 run: $(BUILD_DIR)/$(APP_NAME).jar
-	java -jar $(BUILD_DIR)/$(APP_NAME).jar $(args)
+	java $(JAVA_OPTS) -jar $(BUILD_DIR)/$(APP_NAME).jar $(args)
 
 $(BUILD_DIR)/$(APP_NAME).jar: $(BUILD_DIR)/Manifest.MF $(CLSS)
-	jar --create --manifest $(BUILD_DIR)/Manifest.MF --file $(BUILD_DIR)/$(APP_NAME).jar -C $(BUILD_DIR)/ .
+	jar cvfm $(BUILD_DIR)/$(APP_NAME).jar $(BUILD_DIR)/Manifest.MF -C $(BUILD_DIR)/ .
 
 $(BUILD_DIR)/$(APP_NAME): $(BUILD_DIR)/$(APP_NAME).jar
 	mkdir -p $(BUILD_DIR)/$(APP_NAME)
@@ -27,11 +27,11 @@ $(BUILD_DIR)/Manifest.MF: Manifest.MF
 
 .PHONY: generate-ast
 generate-ast:
-	java -cp $(BUILD_DIR)/$(APP_NAME).jar com.craftinginterpreters.tool.GenerateAst src/com/craftinginterpreters/lox/
+	java $(JAVA_OPTS) -cp $(BUILD_DIR)/$(APP_NAME).jar com.craftinginterpreters.tool.GenerateAst src/com/craftinginterpreters/lox/
 
 .PHONY: print-ast
 print-ast: $(BUILD_DIR)/$(APP_NAME).jar
-	java -cp $(BUILD_DIR)/$(APP_NAME).jar com.craftinginterpreters.lox.AstPrinter
+	java $(JAVA_OPTS) -cp $(BUILD_DIR)/$(APP_NAME).jar com.craftinginterpreters.lox.AstPrinter
 
 .PHONY: clean
 clean:
