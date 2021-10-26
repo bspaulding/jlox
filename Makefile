@@ -26,7 +26,7 @@ $(BUILD_DIR)/Manifest.MF: Manifest.MF
 	cp Manifest.MF $(BUILD_DIR)
 
 .PHONY: generate-ast
-generate-ast:
+generate-ast: $(BUILD_DIR)/$(APP_NAME).jar
 	java $(JAVA_OPTS) -cp $(BUILD_DIR)/$(APP_NAME).jar com.craftinginterpreters.tool.GenerateAst src/com/craftinginterpreters/lox/
 
 .PHONY: print-ast
